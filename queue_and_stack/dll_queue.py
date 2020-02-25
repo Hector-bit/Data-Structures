@@ -11,7 +11,7 @@ class Queue:
         self.back = None
 
     def enqueue(self, value):
-        print(value, 'this is value')
+        self.size += 1
         if self.back is None: 
             self.head = DoublyLinkedList(value) 
             self.back = self.head 
@@ -22,17 +22,15 @@ class Queue:
 
     def dequeue(self):
         if self.front is None: 
-            return None
-        else: 
-            temp= self.front.value 
+            print('somthine')
+            return self.head
+        elif self.front is not None: 
+            temp= self.front
+            print(temp)
             self.front = self.front.next
-            self.front.prev = None
+            self.front.prev=None
+            self.size -= 1
             return temp 
 
     def len(self):
-        temp = self.front 
-        count=0
-        while temp != None: 
-            count=count+1
-            temp=temp.next
-        return count 
+        return self.size
