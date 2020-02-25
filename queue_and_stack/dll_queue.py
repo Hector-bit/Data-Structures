@@ -11,9 +11,10 @@ class Queue:
         self.back = None
 
     def enqueue(self, value):
-        if self.back == None:
-            self.front = DoublyLinkedList(value)
-            self.back = self.front
+        print(value, 'this is value')
+        if self.back is None: 
+            self.head = DoublyLinkedList(value) 
+            self.back = self.head 
         else: 
             self.back.next = DoublyLinkedList(value) 
             self.back.next.prev = self.back 
@@ -23,15 +24,15 @@ class Queue:
         if self.front is None: 
             return None
         else: 
-            temp= self.front.data 
+            temp= self.front.value 
             self.front = self.front.next
-            self.front.prev=None
+            self.front.prev = None
             return temp 
 
     def len(self):
-        temp=self.front 
+        temp = self.front 
         count=0
-        while temp is not None: 
+        while temp != None: 
             count=count+1
             temp=temp.next
         return count 
