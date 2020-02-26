@@ -10,10 +10,9 @@ class LRUCache:
     """
     def __init__(self, limit=10):
         self.limit = limit
-        self.storage = dict()
-        self.order = DoublyLinkedList()
-        self.size = 0
-
+        self.storage = {}
+        self.cache = DoublyLinkedList()
+        self.size = self.cache.length
     """
     Retrieves the value associated with the given key. Also
     needs to move the key-value pair to the end of the order
@@ -22,13 +21,12 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        if key in self.storage[key]:
-            self.order.move_to_end(node)
+        if key in self.storage:
+            node = self.storage[key]
+            self.cache.move_to_end(node)
             return node.value[1]
         else:
             return None
-
-
     """
     Adds the given key-value pair to the cache. The newly-
     added pair should be considered the most-recently used
@@ -40,16 +38,14 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        if key in self.storage:
-            node = self.storage[key]
-            node.value = (key, value)
-            self.storage.move_to_end(node)
-            return
-        if self.size == self.limit:
-            del self.storage.head.value[0]
-            self.storage.remove_from_head()
-            self.order.add_to_tail((key, value))
-            self.storage[key] = value
-        self.size += 1
-        self.order.add_to_tail((key, value))
-        self.storage[key] = self.order.tail
+        if key in self.storage: 
+            self.storage[key].value = (key, value)
+            self.cache.move_to_end(self.storage[key])
+        else:
+            if self.size == self.limit:
+                self.storage.pop(self.cache.head.value[0])
+                self.cache.remove_from_head() 
+            else:
+                self.size += 1
+            self.cache.add_to_tail((key, value))
+            self.storage[key] = self.cache.tail
