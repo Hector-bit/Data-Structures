@@ -11,8 +11,7 @@ class BinarySearchTree:
 
     # Insert the given value into the tree
     def insert(self, value):
-        #if the tree is empty
-        print(value, self.value, 'value then self.value')
+        #if the self.value is empty
         if self.value == None:
             #make the value a root node
             BinarySearchTree(value)
@@ -21,23 +20,39 @@ class BinarySearchTree:
             #if the value is < to the root
             if value < self.value:
                 #place value to the left
-                self.left == BinarySearchTree(value)
+                if self.left == None:
+                    self.left = BinarySearchTree(value)
+                else:
+                    self.left.insert(value)
+                return
             #if the value is > to the root
             if value > self.value:
                 #place value to the right
-                self.right == BinarySearchTree(value)
+                if self.right == None:
+                    self.right = BinarySearchTree(value)
+                else:
+                    # self.right == BinarySearchTree(value)
+                    self.right.insert(value)
+                return
 
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        #if root = target 
-            #return true
-        #if target is < root
-            #go left and check that node
-        #if target is > root
-            #go right and check that node
-        pass
+        if self.value == target:
+            print(self.value, 'AASDF PQWER', target)
+            return True
+        elif target < self.value:
+            if self.left.value == None:
+                return False
+            else:
+                self.left.contains(target)
+        elif target > self.value:
+            if self.right.value == None:
+                return False
+            else:
+                self.right.contains(target)
+        return True
 
     # Return the maximum value found in the tree
     def get_max(self):
