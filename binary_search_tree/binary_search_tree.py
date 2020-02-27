@@ -39,7 +39,6 @@ class BinarySearchTree:
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        print(self.value, 'AASDF PQWER', target)
         if self.value == target:
             return True
         else:
@@ -49,9 +48,7 @@ class BinarySearchTree:
                 else:
                     return self.left.contains(target)
             if target > self.value:
-                print(self.right, 'RIGHTSIDEVALUE')
                 if self.right == None:
-                    print('BIGOLDESUPERFALSE')
                     return False
                 else:
                     return self.right.contains(target)
@@ -59,12 +56,20 @@ class BinarySearchTree:
     # Return the maximum value found in the tree
     def get_max(self):
         #go right until you can't go right anymore and return that node
-        pass
+        if self.right == None:
+            return self.value
+        else:
+            return self.right.get_max()
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
     def for_each(self, cb):
-        pass
+        cb(self.value)
+
+        while self.right != None:
+            return self.right.for_each(cb)
+        while self.left != None:
+            return self.left.for_each(cb)
 
     # DAY 2 Project -----------------------
 
