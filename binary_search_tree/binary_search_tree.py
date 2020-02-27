@@ -11,29 +11,39 @@ class BinarySearchTree:
 
     # Insert the given value into the tree
     def insert(self, value):
-        #if the self.value is empty
-        if self.value == None:
-            #make the value a root node
-            BinarySearchTree(value)
-        #if the tree is not empty
-        if self.value != None:
-            #if the value is < to the root
-            if value < self.value:
-                #place value to the left
-                if self.left == None:
-                    self.left = BinarySearchTree(value)
-                else:
-                    self.left.insert(value)
-                return
-            #if the value is > to the root
-            if value > self.value:
-                #place value to the right
-                if self.right == None:
-                    self.right = BinarySearchTree(value)
-                else:
-                    # self.right == BinarySearchTree(value)
-                    self.right.insert(value)
-                return
+        if value < self.value:
+            if self.left:
+                self.left.insert(value)
+            else:
+                self.left = BinarySearchTree(value)
+        if value >= self.value:
+            if self.right:
+                self.right.insert(value)
+            else:
+                self.right = BinarySearchTree(value)
+        # #if the self.value is empty
+        # if self.value == None:
+        #     #make the value a root node
+        #     BinarySearchTree(value)
+        # #if the tree is not empty
+        # if self.value != None:
+        #     #if the value is < to the root
+        #     if value < self.value:
+        #         #place value to the left
+        #         if self.left == None:
+        #             self.left = BinarySearchTree(value)
+        #         else:
+        #             self.left.insert(value)
+        #         return
+        #     #if the value is > to the root
+        #     if value > self.value:
+        #         #place value to the right
+        #         if self.right == None:
+        #             self.right = BinarySearchTree(value)
+        #         else:
+        #             # self.right == BinarySearchTree(value)
+        #             self.right.insert(value)
+        #         return
 
 
     # Return True if the tree contains the value
@@ -65,11 +75,10 @@ class BinarySearchTree:
     # You may use a recursive or iterative approach
     def for_each(self, cb):
         cb(self.value)
-
-        while self.right != None:
-            return self.right.for_each(cb)
-        while self.left != None:
-            return self.left.for_each(cb)
+        if self.left:
+            self.left.for_each(cb)
+        if self.right:
+            self.right.for_each(cb)
 
     # DAY 2 Project -----------------------
 
