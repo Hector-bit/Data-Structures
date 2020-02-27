@@ -12,7 +12,7 @@ class LRUCache:
         self.limit = limit
         self.storage = {}
         self.cache = DoublyLinkedList()
-        self.size = self.cache.length
+        self.size = 0
     """
     Retrieves the value associated with the given key. Also
     needs to move the key-value pair to the end of the order
@@ -21,6 +21,11 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
+        #if key is in storage
+            #move it to the end
+            #return the value
+        #if key is not in storage
+            #return nothing
         if key in self.storage:
             node = self.storage[key]
             self.cache.move_to_end(node)
@@ -38,6 +43,27 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
+        #If the cache is empty:
+            # Add to the linked list(key and the value)
+            # Add the key and value to the dictionary
+            # increment size
+        # If cache not emtpy:
+            #check and see if the key is in the dict
+            # If it is
+                #overwrite the value
+                #move it to the end
+
+            # if it isn't
+                # check and see if the cache is full
+                    # if the cache is not full
+                        # same as if the cache is empty
+                    # if cach is full
+                        #remove the oldest entry from dict and Linked list
+                        #reduce the size
+                        #same as if cache is emtpy
+        #add to the linked list (key and the value)
+        #add the key and value to the dictionary
+        #increment the size
         if key in self.storage: 
             self.storage[key].value = (key, value)
             self.cache.move_to_end(self.storage[key])
@@ -49,3 +75,11 @@ class LRUCache:
                 self.size += 1
             self.cache.add_to_tail((key, value))
             self.storage[key] = self.cache.tail
+        # if key
+        # if self.size == self.limit:
+        #     del self.storage[self.cache.head.value[0]]
+        #     self.cache.remove_from_head()
+        #     self.size -= 1
+        # self.cache.add_to_tail((key, value))
+        # self.storage[key] = self.cache.tail
+        # self.size += 1
